@@ -20,11 +20,18 @@ let closure = () => {
     let cachedActions = {};
 
     return (action) => (...args) => {
-        let cachedActionsValues = cachedActions[action.name] || (cachedActions[action.name] = {});
-
+        if (!cachedActions.hasOwnProperty(action.name)){
+          cachedActions[action.name] = {};
+        }
+      
+        let cachedActionsValues = cachedActions[action.name];
         let arrayAsKey = args.sort().join();
+      
+        if (!cachedActionsValues.hasOwnProperty(arrayAsKey)){
+          cachedActionsValues[arrayAsKey] = action(...args);
+        }
 
-        let result = cachedActionsValues[arrayAsKey] || (cachedActionsValues[arrayAsKey] = action(...args)) + ' (not in cache yet)';
+        let result = cachedActionsValues[arrayAsKey];
 
         return result;
     }
@@ -32,10 +39,12 @@ let closure = () => {
 
 let memoization = closure();
 
+console.log(memoization(sum)(0))
+console.log(memoization(sum)(0))
 console.log(memoization(sum)(1, 2, 3))
-console.log(memoization(sum)(1, 2, 3))
-console.log(memoization(multiply)(1, 2, 3))
-console.log(memoization(multiply)(3, 2, 1))
+console.log(memoization(sum)(3, 2, 1))
+console.log(memoization(multiply)(4, 2, 3))
+console.log(memoization(multiply)(3, 2, 4))
 
 // Task 3
 class Warrior {
