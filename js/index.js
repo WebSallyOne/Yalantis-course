@@ -79,11 +79,11 @@ class Monster extends Warrior {
 
     getAttackDamage() {
         // Monster can deal critical damage (x2) with 15% chance
-        let isCriticalStrike = Math.floor(Math.random() * (100)) + 1 <= 15;
+        let isCriticalStrike = Math.round(Math.random() * (100)) + 1 <= 15;
         let attackDamage = super.getAttackDamage();
 
         if (isCriticalStrike) {
-            console.log(`${this.name} (monster) deals a critical strike!`);
+            console.log(`${this.name} (monster) deals a critical strike (X2)!`);
             attackDamage *= 2;
         }
 
@@ -98,9 +98,9 @@ class Gladiator extends Warrior {
 
     dealDamage(amountOfDamage) {
         // Gladiator has some armor, so he reduces incoming damage
-        let reducedDamage = Math.floor(amountOfDamage * 0.8);
+        let reducedDamage = Math.round(amountOfDamage * 0.8);
         
-        console.log(`${this.name} (gladiator) reduced incoming damage by 20%`);
+        console.log(`${this.name} (gladiator) reduced incoming damage by 20% (${amountOfDamage} -> ${reducedDamage})`);
 
         return super.dealDamage(reducedDamage);
     }
@@ -133,7 +133,7 @@ class Game {
         let persons = [this.firstWarrior, this.secondWarrior];
 
         // Randomize first move
-        if (Math.floor(Math.random())) {
+        if (Math.round(Math.random())) {
             persons.reverse();
         }
 
