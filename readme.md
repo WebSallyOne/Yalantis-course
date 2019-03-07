@@ -2,7 +2,7 @@ Serhii Halych
 
 Course progress:
 1. Functions + OOP (done)
-2. Asynchronous JS + ES6 features
+2. Asynchronous JS + ES6 features (done)
 3. Node.js - intro:What is Node.js?
 - Non-Blockining IO
 - libuv
